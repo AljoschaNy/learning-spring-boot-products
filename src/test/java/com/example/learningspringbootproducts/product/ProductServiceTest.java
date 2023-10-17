@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -39,6 +40,14 @@ class ProductServiceTest {
         Product actual = productService.findProductById("p1");
         // THEN
         assertEquals(expected,actual);
+    }
+
+    @Test
+    void findProductById_invalidId_thenReturnException() {
+        // WHEN
+        when(productRepo.findById("p1")).thenThrow(new NoSuchElementException());
+        // THEN
+        assertThrows(NoSuchElementException.class, () -> productRepo.findById("p1"));
     }
 
     @Test
