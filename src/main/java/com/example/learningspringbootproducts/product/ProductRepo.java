@@ -9,4 +9,5 @@ import java.util.List;
 public interface ProductRepo extends MongoRepository<Product, String> {
     List<Product> findProductsByPrice(double price);
     List<Product> findProductsByPriceLessThanEqual(double price);
+    Product updateProductById(String id, double newPrice);
 }
